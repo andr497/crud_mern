@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import PersonasModel from '../models/Personas.model.js';
 
-export const obtenerPersona = async (req, res) => {
+export const obtener = async (req, res) => {
     try{
         const personas = await PersonasModel.find();
 
@@ -19,7 +19,7 @@ export const obtenerPersona = async (req, res) => {
     }
 }
 
-export const guardarPersona = async (req, res) => {
+export const guardar = async (req, res) => {
     try{
         const persona = req.body;
 
@@ -39,7 +39,7 @@ export const guardarPersona = async (req, res) => {
     }
 }
 
-export const editarPersona = async(req, res) => {
+export const editar = async(req, res) => {
     try {
         const { id: _id } = req.params;
         const persona = req.body;
@@ -72,7 +72,7 @@ export const editarPersona = async(req, res) => {
     }
 }
 
-export const borrarPersona = async(req, res) => {
+export const borrar = async(req, res) => {
 
     try {
         const { id: _id } = req.params;

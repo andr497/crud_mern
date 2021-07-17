@@ -1,17 +1,17 @@
 import PersonasModel from "../models/Personas.model.js"
-import Assert from 'assert';
 
-export const validacionPersona = async (req, res, next) => {
+export const validacionPersona = (req, res, next) => {
     try{
         const datos = req.body;
 
         const persona = new PersonasModel({...datos});
 
-        const emailExiste = await PersonasModel.findOne({email: persona.email});
+        validarCampo("nombre", persona.nombre);
+        validarCampo("apellido", persona.apellido);
+        validarCampo("email", persona.email);
+        validarCampo("telefono", persona.telefono);
 
-        if(emailExiste){
-            throw new Error("Email ya existe");
-        }
+        validarCorreoUnico();
 
         next();
         
@@ -23,4 +23,19 @@ export const validacionPersona = async (req, res, next) => {
         })
     }
 
+}
+
+export const validarCorreoUnico = async () => {
+        
+    const emailExiste = await PersonasModel.findOne({email: persona.email});
+
+    if(emailExiste){
+        throw new Error("Email ya existe");
+    }
+}
+
+const validarCampo = (llave, valor) => {
+    if(typeof valor === "undefined"){
+        throw new Error(`Campo ${llave} es requerido.`);
+    }
 }

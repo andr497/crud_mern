@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
-app.use('/api', personaRouter);
+app.use('/api/persona', personaRouter);
 
 const CONNECTION_URL="mongodb://localhost:27017/crud_mern";
 const PORT = 5000;

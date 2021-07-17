@@ -1,12 +1,20 @@
 import express from 'express';
-import { obtenerPersona, guardarPersona, editarPersona, borrarPersona } from '../controller/persona.controller.js';
+import { obtener, guardar, editar, borrar } from '../controller/persona.controller.js';
 import { validacionPersona } from '../middlewares/validacionPersona.js';
 
 const router = express.Router();
 
-router.get('/obtenerPersona', obtenerPersona);
-router.post('/guardarPersona', validacionPersona, guardarPersona);
-router.put('/editarPersona/:id', editarPersona);
-router.delete('/borrarPersona/:id', borrarPersona);
+router.get('/obtener', obtener);
+router.post('/guardar', validacionPersona, guardar);
+router.put('/editar/:id', editar);
+router.delete('/borrar/:id', borrar);
+
+router.get('*', function(req, res){
+    res.status(404).json({
+        estado: false,
+        error: true,
+        mensaje: "Pagina no encontrada"
+    })
+})
 
 export default router;
