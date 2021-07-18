@@ -5,13 +5,15 @@ export const obtener = async (req, res) => {
     try{
         const personas = await PersonasModel.find();
 
+        //throw new Error("Ha ocurrido un error")
+
         res.status(200).json({
             estado: true,
             datos: personas
         })
 
     } catch(error){
-        res.status(500).json({
+        res.status(400).json({
             estado: false,
             error: true,
             mensaje: error.message
@@ -31,7 +33,7 @@ export const guardar = async (req, res) => {
         })
         
     } catch(error){
-        res.status(500).json({
+        res.status(400).json({
             estado: false,
             error: true,
             mensaje: error.message
@@ -64,7 +66,7 @@ export const editar = async(req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             estado: false,
             error: true,
             mensaje: error.message
@@ -97,7 +99,7 @@ export const borrar = async(req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             estado: false,
             error: true,
             mensaje: error.message

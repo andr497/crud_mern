@@ -1,8 +1,9 @@
 import { makeStyles } from "@material-ui/core";
 
 export default makeStyles((theme) => ({
-    tableHeader: {
-        background: 'black',
-        color: 'white'
+    [theme.breakpoints.down('sm')]: {
+        mainContainer: {
+            flexDirection: "column-reverse"
+        }
     }
 }));

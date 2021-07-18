@@ -2,7 +2,7 @@ import PersonasModel from "../models/Personas.model.js"
 
 export const validacionPersona = (req, res, next) => {
     try{
-        const datos = req.body;
+        let datos = req.body;
 
         const persona = new PersonasModel({...datos});
 
@@ -16,7 +16,7 @@ export const validacionPersona = (req, res, next) => {
         next();
         
     } catch(error){
-        res.status(500).json({
+        res.status(400).json({
             estado: false,
             error: true,
             mensaje: error.message
@@ -25,9 +25,9 @@ export const validacionPersona = (req, res, next) => {
 
 }
 
-export const validarCorreoUnico = async () => {
+export const validarCorreoUnico = async (email) => {
         
-    const emailExiste = await PersonasModel.findOne({email: persona.email});
+    const emailExiste = await PersonasModel.findOne({email});
 
     if(emailExiste){
         throw new Error("Email ya existe");
@@ -35,7 +35,7 @@ export const validarCorreoUnico = async () => {
 }
 
 const validarCampo = (llave, valor) => {
-    if(typeof valor === "undefined"){
+    if(typeof valor === "undefined" || valor === ""){
         throw new Error(`Campo ${llave} es requerido.`);
     }
 }

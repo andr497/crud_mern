@@ -8,7 +8,7 @@ import personaRouter from './routes/personas.router.js';
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({extended: true}));
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
