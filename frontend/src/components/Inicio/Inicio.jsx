@@ -1,6 +1,5 @@
 import React,{ useEffect, useState } from 'react';
 import { Container, Grow, Grid } from '@material-ui/core';
-import axios from 'axios';
 
 import useStyles from './styles'
 import TableUser from '../TableUser/TableUser';

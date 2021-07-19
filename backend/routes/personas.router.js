@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/obtener', obtener);
 router.post('/guardar', validacionPersona, guardar);
-router.put('/editar/:id', editar);
+router.put('/editar/:id', validacionPersona, editar);
 router.delete('/borrar/:id', borrar);
 
 router.get('*', function(req, res){

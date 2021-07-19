@@ -3,6 +3,7 @@ import PersonasModel from "../models/Personas.model.js"
 export const validacionPersona = (req, res, next) => {
     try{
         let datos = req.body;
+        const { id } = req.params;
 
         const persona = new PersonasModel({...datos});
 
@@ -11,7 +12,10 @@ export const validacionPersona = (req, res, next) => {
         validarCampo("email", persona.email);
         validarCampo("telefono", persona.telefono);
 
-        validarCorreoUnico();
+        if(typeof id === "undefined" && req.method === "POST"){
+            console.log("Registro nuevo verificar email")
+            validarCorreoUnico(persona.email);
+        }
 
         next();
         
@@ -25,7 +29,7 @@ export const validacionPersona = (req, res, next) => {
 
 }
 
-export const validarCorreoUnico = async (email) => {
+const validarCorreoUnico = async (email) => {
         
     const emailExiste = await PersonasModel.findOne({email});
 

@@ -21,6 +21,7 @@ const Form = ({ personaId, setPersonaId, setPersonas, personas = null }) => {
     }, [personaSeleccionada]);
 
     const clear = () => {
+        setError({})
         setPersonaId(null);
         setPersonaData(initialFormState)
     }
@@ -34,6 +35,7 @@ const Form = ({ personaId, setPersonaId, setPersonas, personas = null }) => {
             editar(personaData, personaId).then((response) => {
                 if(response.estado){
                     setPersonas({...personas, datos: datos.map(pd => [response.datos].find(rd => rd._id === pd._id) || pd)})
+                    clear();
                 } else {
                     setError({...response});
                 }
@@ -45,13 +47,12 @@ const Form = ({ personaId, setPersonaId, setPersonas, personas = null }) => {
             guardar(personaData).then((response) => {
                 if(response.estado){
                     setPersonas({...personas, ...datos.push(response.datos)})
+                    clear();
                 } else {
                     setError({...response});
                 }
             })
         }
-        
-        //clear();
     }
 
     return (
